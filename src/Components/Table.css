@@ -1,0 +1,10 @@
+.board-spacing{
+    padding: 3rem;
+    height: 100%;
+}
+
+.put-bottom{
+    bottom: 50px;
+    position: absolute;
+    width: 100%
+}
