@@ -1,10 +1,13 @@
 .board-spacing{
     padding: 3rem;
-    height: 100%;
+    bottom:60px;
+    overflow: auto;
 }
 
 .put-bottom{
-    bottom: 50px;
+    bottom: 0;
+    height:50px;
     position: absolute;
-    width: 100%
+    width: 100%;
+    overflow: hidden;
 }

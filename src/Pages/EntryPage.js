@@ -1,32 +1,15 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React from 'react';
 import SpendList from '../Components/SpendList';
 import InputEntry from '../Components/InputEntry';
-import {fetchEntries, postEntry} from '../API/EntryAPI'
+import EntryProvider from '../Store/EntryProvider';
 
 const EntryPage = () => {
-    const [spendList, setspendList] = useState([]);
-    
-    useEffect(
-        ()=> {
-            async function fetchData() {
-                const data = await fetchEntries();
-                setspendList(data)
-            }
-            fetchData();
-        }, [])
 
-    const AddHandler = (data) => {
-        setspendList(spendList.concat(data))
-        postEntry(data)
-        console.log(data)
-    }
-
-    
-
-    return ( <React.Fragment>
-        <SpendList data={spendList}></SpendList>
-        <InputEntry onAdd = {AddHandler}></InputEntry>
-    </React.Fragment> );
+    return (
+        <React.Fragment>
+            <SpendList></SpendList>
+            <InputEntry></InputEntry>
+        </React.Fragment> );
 }
  
 export default EntryPage;

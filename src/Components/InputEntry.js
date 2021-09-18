@@ -1,30 +1,18 @@
 
 import { Col, Container, Row, Form, Button} from 'react-bootstrap';
-import React, {useRef, useState, useEffect} from 'react';
-import {getCategory} from '../API/EntryAPI'
+import React, {useRef, useContext} from 'react';
+import EntryContext from '../Store/EntryContext';
 
-
-const InputEntry = (props) => {
+const InputEntry = () => {
 
     const CategoryRef = useRef()
     const DescriptionRef = useRef()
     const AmountRef = useRef()
 
-    const [category, setcategory] = useState([]);
-    let temp = <div></div>
-
-    useEffect(
-        ()=> {
-            async function fetchData() {
-                const data = await getCategory();
-                setcategory(data)
-            }
-            fetchData();
-        }, [])
+    const ctx = useContext(EntryContext)
+    const category = ctx.categoryList
     
-    if (category.length > 0){
-        temp = category[0].category.map((item) => <option value={item}>{item}</option>)
-    }
+    const temp = category.map((item) => <option key={category.indexOf(item)} value={item}>{item}</option>)
 
     return ( 
         <div className="put-bottom">
@@ -43,7 +31,7 @@ const InputEntry = (props) => {
                 <Form.Control ref={AmountRef} type="number" placeholder="Amount"/>
                 </Col>
                 <Col>
-                <Button onClick={() => props.onAdd({
+                <Button onClick={() => ctx.addEntry({
                         "category": CategoryRef.current.value,
                         "description": DescriptionRef.current.value,
                         "amount": AmountRef.current.value
